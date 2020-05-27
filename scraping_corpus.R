@@ -3,6 +3,11 @@
 # Autor: @gustavoovital
 # Data: 23/05/2020
 
+# To Run ----
+
+rm(list = ls())
+
+source('Functions/functions.R')
 library(rvest)
 library(tidyverse)
 library(pdftools)
@@ -23,21 +28,16 @@ tables <- url_vangogh %>%
   rvest::html_nodes('table') %>% 
   html_table(fill = TRUE) 
 
-# split function ----
-
-split_n <-
-  function(caracter){
-    split <- str_c(unlist(caracter %>%
-                            str_split("[\r\n]")), collapse = " ")
-  }
 
 # Criando um Corpus ---
 
 
 corpus <- tibble(Pdf = na.omit(pdfs),
+                 Numbers = (tables[[3]][["X1"]])[2:(length(tables[[3]][["X1"]]))],
                  Data = (tables[[3]][["X2"]])[2:length(tables[[3]][["X2"]])],
                  From = (tables[[3]][["X4"]])[2:length(tables[[3]][["X4"]])],
-                 To = (tables[[3]][["X5"]])[2:length(tables[[3]][["X5"]])]) %>% 
+                 To = (tables[[3]][["X5"]])[2:length(tables[[3]][["X5"]])],
+                 Origin = (tables[[3]][["X3"]])[2:length(tables[[3]][["X3"]])]) %>% 
   filter(From == 'VvG', To == 'TvG')
 
 corpus$text <- NA
@@ -52,7 +52,8 @@ for(carta in 1:nrow(corpus)){
 corpus$doc_id <- 1:nrow(corpus)
 
 corpus %>% 
-  select(doc_id, text, Data) -> corpus
+  select(doc_id, text, Data, Origin, Numbers
+  ) -> corpus
   
 saveRDS(corpus, 'Data/corpus.rds')
 rm(list = ls())
