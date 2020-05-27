@@ -40,10 +40,10 @@ corpus$Life <- c(rep('Earliest', 167),
 
 saveRDS(corpus, 'Data/corpus_all.rds')
 
-corpus %>% filter(Life == 'Earliest') %>%  saveRDS('Data/corpus_Earliest')
-corpus %>% filter(Life == 'Netherlands') %>%  saveRDS('Data/corpus_Netherlands')
-corpus %>% filter(Life == 'Arles') %>%  saveRDS('Data/corpus_Arles')
-corpus %>% filter(Life == 'Saint-Remy') %>%  saveRDS('Data/corpus_SaintRemy')
-corpus %>% filter(Life == 'Auver-sur-Oises') %>%  saveRDS('Data/corpus_AuverSurOises')
+corpus %>% filter(Life == 'Earliest') %>%  saveRDS('Data/corpus_Earliest.rds')
+corpus %>% filter(Life == 'Netherlands') %>%  saveRDS('Data/corpus_Netherlands.rds')
+corpus %>% filter(Life == 'Arles') %>%  saveRDS('Data/corpus_Arles.rds')
+corpus %>% filter(Life == 'Saint-Remy') %>%  saveRDS('Data/corpus_SaintRemy.rds')
+corpus %>% filter(Life == 'Auver-sur-Oises') %>%  saveRDS('Data/corpus_AuverSurOises.rds')
 
 rm(list = ls())

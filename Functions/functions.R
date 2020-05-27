@@ -12,3 +12,4 @@ split_n <-   function(caracter){
 
 # StopWords ----
 
+StopWords <- (c(stopwords::stopwords(), letters, 'copyright', 'theo', 'mr', 'dear', 'brother'))
